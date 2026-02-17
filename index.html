@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feliz Cumpleaños Kiana 🎂</title>
+<title>Feliz Cumpleaños Kiana 💖</title>
 
 <style>
 *{
@@ -19,9 +19,54 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(to bottom, #1a002b, #000);
+  background:radial-gradient(circle at center, #3b0066, #000);
   color:white;
   text-align:center;
+}
+
+/* Texto central */
+.center{
+  position:relative;
+  z-index:10;
+}
+
+.center h1{
+  font-size:3rem;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{ text-shadow:0 0 10px #ff69b4; }
+  to{ text-shadow:0 0 30px #ff1493, 0 0 50px #ff69b4; }
+}
+
+.center p{
+  margin-top:15px;
+  font-size:1.2rem;
+}
+
+/* Caritas caminando */
+.loveFace{
+  position:absolute;
+  font-size:30px;
+  animation:walk linear infinite;
+}
+
+@keyframes walk{
+  from{ transform:translateX(-10vw); }
+  to{ transform:translateX(110vw); }
+}
+
+/* Corazones flotando */
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+  from{ transform:translateY(100vh); opacity:1; }
+  to{ transform:translateY(-10vh); opacity:0; }
 }
 
 /* Confeti */
@@ -29,35 +74,12 @@ body{
   position:absolute;
   width:8px;
   height:8px;
-  background:red;
-  animation:fall 5s linear infinite;
+  animation:fall linear infinite;
 }
 
 @keyframes fall{
-  0%{transform:translateY(-10vh);}
-  100%{transform:translateY(110vh);}
-}
-
-/* Texto central */
-.center{
-  position:relative;
-  z-index:5;
-}
-
-.center h1{
-  font-size:3rem;
-  text-shadow:0 0 20px #ff69b4,0 0 40px #ff1493;
-  animation:pulse 2s infinite alternate;
-}
-
-@keyframes pulse{
-  from{transform:scale(1);}
-  to{transform:scale(1.1);}
-}
-
-.center p{
-  margin-top:15px;
-  font-size:1.2rem;
+  from{ transform:translateY(-10vh); }
+  to{ transform:translateY(110vh); }
 }
 
 .tap{
@@ -72,9 +94,9 @@ body{
 <body>
 
 <div class="center">
-  <h1>🎂 Feliz Cumpleaños Kiana 🎂</h1>
-  <p>Hoy celebra el mundo porque nació alguien increíble ✨</p>
-  <p>Te amo infinitamente 💖</p>
+  <h1>🎂 Feliz Cumpleaños Kiana 💖</h1>
+  <p>Eres mi razón de sonreír todos los días ✨</p>
+  <p>Te amo infinito 💞</p>
 </div>
 
 <div class="tap">Toca la pantalla para activar la música 🎶</div>
@@ -84,6 +106,37 @@ body{
 </audio>
 
 <script>
+
+/* Música */
+const music=document.getElementById("music");
+document.body.addEventListener("click",()=>{
+  music.play();
+},{once:true});
+
+/* Caritas enamoradas */
+function createLoveFace(){
+  const face=document.createElement("div");
+  face.classList.add("loveFace");
+  face.innerHTML="😍";
+  face.style.top=Math.random()*80+"vh";
+  face.style.animationDuration=(Math.random()*10+5)+"s";
+  document.body.appendChild(face);
+  setTimeout(()=>face.remove(),15000);
+}
+setInterval(createLoveFace,1500);
+
+/* Corazones flotando */
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*5+3)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),8000);
+}
+setInterval(createHeart,500);
+
 /* Confeti */
 function createConfetti(){
   const conf=document.createElement("div");
@@ -96,11 +149,6 @@ function createConfetti(){
 }
 setInterval(createConfetti,200);
 
-/* Música */
-const music=document.getElementById("music");
-document.body.addEventListener("click",()=>{
-  music.play();
-},{once:true});
 </script>
 
 </body>
